@@ -12,13 +12,11 @@ const App = () => {
 
 
   const getUserGeolocationDetails = () => {
-    fetch(
-        "https://geolocation-db.com/json/344ec440-6bfc-11eb-a0c0-b5dee9e67313"
-    )
+    fetch("/myip")
         .then(response => response.json())
         .then(data => {
-          
-          setDetails(data)
+          console.log(data)
+          setDetails(data.url)
         
         });
   }
@@ -31,11 +29,9 @@ const App = () => {
 
 
   const handleApiCall = async (e) => {
-    let url = 'http://172.31.32.42:32470/'+e.target.name
-    console.log(details.IPv4)
-    console.log(url)
+    let url = 'http://'+details+':32470/'+e.target.name
+    
     displayData.url=url
-    if(url){
     let options = {}
       try {
           setLoading(true)
@@ -51,7 +47,7 @@ const App = () => {
       finally {
           setLoading(false)
       }
-    }
+    
   }
 
 

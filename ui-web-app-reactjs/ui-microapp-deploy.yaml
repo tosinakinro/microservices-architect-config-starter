@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  "microapp-ui"
+  namespace: default
+  labels:
+    app:  "microapp-ui"
+spec:
+  selector:
+    matchLabels:
+      app: "microapp-ui"
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  "microapp-ui"
+    spec:
+      containers:
+      - name:  "microapp-ui"
+        image:  786860195352.dkr.ecr.us-east-2.amazonaws.com/microapp_ui_repo:latest
+        resources:
+          requests:
+            cpu: 10m
+            memory: 10Mi
+          limits:
+            cpu: 20m
+            memory: 20Mi
+        
+        ports:
+        - containerPort:  8080
+          name:  "microapp-ui"
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: "microapp-ui"
+  namespace: default
+spec:
+  selector:
+    app: "microapp-ui"
+  type: `NodePort
+  ports:
+  - name: "microapp-ui"
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
