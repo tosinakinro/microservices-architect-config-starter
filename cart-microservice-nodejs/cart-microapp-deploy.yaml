@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  "microapp-cart"
+  namespace: default
+  labels:
+    app:  "microapp-cart"
+spec:
+  selector:
+    matchLabels:
+      app: "microapp-cart"
+  replicas: 1
