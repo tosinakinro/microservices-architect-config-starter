@@ -22,4 +22,4 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: oluwatoseen/microapp-api-gateway:latest
+        tags: oluwatoseen/microapp-api:latest
