@@ -3,15 +3,18 @@ name: Docker Image CI (API-Gateway)
 on:
   push:
     branches: [ "main" ]
-    path: [zuul-api-gateway/**]
+    paths: ["zuul-api-gateway/**"]
   pull_request:
     branches: [ "main" ]
-    path: [zuul-api-gateway/**]
+    paths: ["zuul-api-gateway/**"]
               
 
 jobs:
   docker:
     runs-on: ubuntu-latest
+    #defaults:
+      #run:
+        #working-directory: ./zuul-api-gateway
     steps:
     - name: Login to Docker Hub
       uses: docker/login-action@v2
