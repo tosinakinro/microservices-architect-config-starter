@@ -2,11 +2,11 @@ name: Docker Image CI (Cart)
 
 on:
   push:
-    branches: [ "master" ]
-    path: [cart-microservice-nodejs/**]
+    branches: [ "main" ]
+    paths: ["cart-microservice-nodejs/**"]
   pull_request:
-    branches: [ "master" ]
-    path: [cart-microservice-nodejs/**]
+    branches: [ "main" ]
+    paths: ["cart-microservice-nodejs/**"]
               
 
 jobs:
