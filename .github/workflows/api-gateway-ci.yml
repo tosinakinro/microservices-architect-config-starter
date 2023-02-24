@@ -3,10 +3,10 @@ name: Docker Image CI (API-Gateway)
 on:
   push:
     branches: [ "main" ]
-    path: [zuul-api-gateway/**]
+    path: ["zuul-api-gateway/**"]
   pull_request:
     branches: [ "main" ]
-    path: [zuul-api-gateway/**]
+    path: ["zuul-api-gateway/**"]
               
 
 jobs:
