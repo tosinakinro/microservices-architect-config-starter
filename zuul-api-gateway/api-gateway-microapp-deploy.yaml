@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -34,40 +33,3 @@ spec:
         ports:
         - containerPort:  80
           name: "microapp-api"
-=======
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name:  "microapp-api"
-  namespace: default
-  labels:
-    app:  "microapp-api"
-spec:
-  selector:
-    matchLabels:
-      app: "microapp-api"
-  replicas: 1
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: "microapp-api"
-    spec:
-      containers:
-      - name:  microapp-api
-        image: oluwatoseen/microapp-api
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-          limits:
-            cpu: 100m
-            memory: 100Mi
-        ports:
-        - containerPort:  80
-          name: "microapp-api"
->>>>>>> 874a1b7ffa52db0c3fae95882e4ede53b760adf2
