@@ -1,0 +1,50 @@
+k8s apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  "microapp-cart"
+  namespace: default
+  labels:
+    app:  "microapp-cart"
+spec:
+  selector:
+    matchLabels:
+      app: "microapp-cart"
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  "microapp-cart"
+    spec:
+      containers:
+      - name:  "microapp-cart"
+        image:  oluwatoseen/microapp-cart
+        resources:
+          requests:
+            cpu: 50m
+            memory: 500Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort:  80
+          name:  "microapp-cart"
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: "microapp-cart"
+  namespace: default
+spec:
+  selector:
+    app: "microapp-cart"
+  type: LoadBalancer
+  ports:
+  - name: "microapp-cart"
+    protocol: TCP
+    port: 80
