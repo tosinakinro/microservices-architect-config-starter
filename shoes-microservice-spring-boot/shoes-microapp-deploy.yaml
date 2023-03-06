@@ -38,13 +38,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: "microapp-cart"
+  name: "microapp-shoes"
   namespace: default
 spec:
   selector:
-    app: "microapp-cart"
+    app: "microapp-shoes"
   type: LoadBalancer
   ports:
-  - name: "microapp-cart"
+  - name: "microapp-shoes"
     protocol: TCP
     port: 80
