@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+k8s apiVersion: apps/v1
 kind: Deployment
 metadata:
   name:  "microapp-ui"
@@ -9,11 +9,11 @@ spec:
   selector:
     matchLabels:
       app: "microapp-ui"
-  replicas: 1
+  replicas: 2
   strategy:
     rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
+      maxSurge: 50%
+      maxUnavailable: 0%
     type: RollingUpdate
   template:
     metadata:
@@ -22,19 +22,17 @@ spec:
     spec:
       containers:
       - name:  "microapp-ui"
-        image:  786860195352.dkr.ecr.us-east-2.amazonaws.com/microapp_ui_repo:latest
+        image:  oluwatoseen/microapp-cart
         resources:
           requests:
-            cpu: 10m
-            memory: 10Mi
+            cpu: 50m
+            memory: 500Mi
           limits:
-            cpu: 20m
-            memory: 20Mi
-        
+            cpu: 100m
+            memory: 100Mi
         ports:
-        - containerPort:  8080
+        - containerPort:  80
           name:  "microapp-ui"
-
 
 ---
 
@@ -46,9 +44,8 @@ metadata:
 spec:
   selector:
     app: "microapp-ui"
-  type: `NodePort
+  type: LoadBalancer
   ports:
   - name: "microapp-ui"
     protocol: TCP
-    port: 8080
-    targetPort: 8080
+    port: 80

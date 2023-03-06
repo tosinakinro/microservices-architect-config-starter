@@ -1,14 +1,14 @@
-k8s apiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  "microapp-shoes"
+  name:  "microapp-api"
   namespace: default
   labels:
-    app:  "microapp-shoes"
+    app:  "microapp-api"
 spec:
   selector:
     matchLabels:
-      app: "microapp-shoes"
+      app: "microapp-api"
   replicas: 2
   strategy:
     rollingUpdate:
@@ -18,33 +18,35 @@ spec:
   template:
     metadata:
       labels:
-        app:  "microapp-shoes"
+        app: "microapp-api"
     spec:
       containers:
-      - name:  "microapp-shoes"
-        image:  oluwatoseen/microapp-shoes
+      - name:  microapp-api
+        image: oluwatoseen/microapp-api
         resources:
           requests:
-            cpu: 50m
-            memory: 500Mi
+            cpu: 100m
+            memory: 100Mi
           limits:
             cpu: 100m
             memory: 100Mi
         ports:
         - containerPort:  80
-          name:  "microapp-shoes"
+          name: "microapp-api"
 
+---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: "microapp-shoes"
+  name: "microapp-api"
   namespace: default
 spec:
   selector:
-    app: "microapp-shoes"
+    app: "microapp-api"
   type: LoadBalancer
   ports:
-  - name: "microapp-shoes"
+  - name: "microapp-api"
     protocol: TCP
     port: 80
+
