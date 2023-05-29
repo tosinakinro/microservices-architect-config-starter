@@ -1,14 +1,14 @@
-k8s apiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  "microapp-wishlist"
+  name:  "microapp-cart"
   namespace: default
   labels:
-    app:  "microapp-wishlist"
+    app:  "microapp-cart"
 spec:
   selector:
     matchLabels:
-      app: "microapp-wishlist"
+      app: "microapp-cart"
   replicas: 2
   strategy:
     rollingUpdate:
@@ -18,35 +18,34 @@ spec:
   template:
     metadata:
       labels:
-        app:  "microapp-wishlist"
+        app:  "microapp-cart"
     spec:
       containers:
-      - name:  "microapp-wishlist"
-        image:  oluwatoseen/microapp-wishlist
+      - name:  "microapp-cart"
+        image:  oluwatoseen/microapp-cart
         resources:
           requests:
             cpu: 50m
-            memory: 500Mi
+            memory: 50Mi
           limits:
             cpu: 100m
             memory: 100Mi
         ports:
         - containerPort:  80
-          name:  "microapp-wishlist"
+          name:  "microapp-cart"
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: "microapp-wishlist"
+  name: "microapp-cart"
   namespace: default
 spec:
   selector:
-    app: "microapp-wishlist"
+    app: "microapp-cart"
   type: LoadBalancer
   ports:
-  - name: "microapp-wishlist"
+  - name: "microapp-cart"
     protocol: TCP
     port: 80
-

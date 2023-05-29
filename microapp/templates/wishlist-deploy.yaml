@@ -1,14 +1,14 @@
-k8s apiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  "microapp-ui"
+  name:  "microapp-wlist"
   namespace: default
   labels:
-    app:  "microapp-ui"
+    app:  "microapp-wlist"
 spec:
   selector:
     matchLabels:
-      app: "microapp-ui"
+      app: "microapp-wlist"
   replicas: 2
   strategy:
     rollingUpdate:
@@ -18,34 +18,35 @@ spec:
   template:
     metadata:
       labels:
-        app:  "microapp-ui"
+        app:  "microapp-wlist"
     spec:
       containers:
-      - name:  "microapp-ui"
-        image:  oluwatoseen/microapp-cart
+      - name:  "microapp-wlist"
+        image:  oluwatoseen/microapp-wishlist
         resources:
           requests:
             cpu: 50m
-            memory: 500Mi
+            memory: 50Mi
           limits:
             cpu: 100m
             memory: 100Mi
         ports:
         - containerPort:  80
-          name:  "microapp-ui"
+          name:  "microapp-wlist"
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: "microapp-ui"
+  name: "microapp-wlist"
   namespace: default
 spec:
   selector:
-    app: "microapp-ui"
+    app: "microapp-wlist"
   type: LoadBalancer
   ports:
-  - name: "microapp-ui"
+  - name: "microapp-wlist"
     protocol: TCP
     port: 80
+

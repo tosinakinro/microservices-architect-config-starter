@@ -1,14 +1,14 @@
-k8s apiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  "microapp-offers"
+  name:  "microapp-ui"
   namespace: default
   labels:
-    app:  "microapp-offers"
+    app:  "microapp-ui"
 spec:
   selector:
     matchLabels:
-      app: "microapp-offers"
+      app: "microapp-ui"
   replicas: 2
   strategy:
     rollingUpdate:
@@ -18,34 +18,34 @@ spec:
   template:
     metadata:
       labels:
-        app:  "microapp-offers"
+        app:  "microapp-ui"
     spec:
       containers:
-      - name:  "microapp-offers"
-        image:  oluwatoseen/microapp-offers
+      - name:  "microapp-ui"
+        image:  oluwatoseen/microapp-cart
         resources:
           requests:
             cpu: 50m
-            memory: 500Mi
+            memory: 50Mi
           limits:
             cpu: 100m
             memory: 100Mi
         ports:
         - containerPort:  80
-          name:  "microapp-offers"
+          name:  "microapp-ui"
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: "microapp-offers"
+  name: "microapp-ui"
   namespace: default
 spec:
   selector:
-    app: "microapp-offers"
+    app: "microapp-ui"
   type: LoadBalancer
   ports:
-  - name: "microapp-offers"
+  - name: "microapp-ui"
     protocol: TCP
     port: 80
